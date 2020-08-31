@@ -1,12 +1,13 @@
-const color = "rgba(0, 0, 0, 1)";
-const bgColor = "rgba(0, 0, 0, 1)";
+const color = "rgb(38, 56, 255)";
+//const bgColor = "rgb(38, 56, 255)";
 
 const grid = 80;
 const gridOffset = grid / 2;
-const shapeSize = grid - 4;
+const shapeSize = grid - 6;
 const shapeRound = shapeSize / 2;
 
 const mistake = 1.1; // 1.08
+const conectedObjectShape = 1.16; // 1.08
 
 let startCoordinates = null;
 
@@ -36,7 +37,7 @@ const StartDefs = document.createElementNS(
 );
 StartDefs.innerHTML = `<marker id="startDefs" orient="auto" markerWidth="3" markerHeight="3" refX="-0.50" refY="0.5">
 <!-- triangle pointing right (+x) -->
-<path d="M0,0 V1 A 0.75 0.75, 0, 0, 1 ${mistake}  1 V0 A 0.75 0.75, 0, 0, 1 0 0 Z" fill="${color}"></path>
+<path d="M0,0 V1 A 0.75 0.75, 0, 0, 1 ${conectedObjectShape}  1 V0 A 0.75 0.75, 0, 0, 1 0 0 Z" fill="${color}"></path>
 </marker>`;
 
 // const EndDefs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
@@ -61,7 +62,7 @@ const drowLine = (newCoordinates) => {
       startCoordinates[0] === newCoordinates[0] ||
       startCoordinates[1] === newCoordinates[1];
 
-    const lineColor = straight ? "black" : "transparent";
+    const lineColor = straight ? color : "";
     const lineShape = straight ? "" : "url(#startDefs)";
     const lineWight = straight
       ? shapeSize
