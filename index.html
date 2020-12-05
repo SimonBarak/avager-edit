@@ -3,11 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Avager Edit</title>
+    <title>Dot Line Dot</title>
   </head>
   <style>
     body {
       background-color: rgb(37, 37, 37);
+      font-family: sans-serif;
+      margin: 0;
+    }
+
+    .controls {
+      margin-top: 0;
+    }
+
+    .download {
+      border-radius: 20px;
+      margin-top: 20px;
+      padding: 0.5em 0.7em;
+      font-size: 2em;
+      background-color: rgb(60, 80, 255);
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .download:hover {
+      background-color: rgb(60, 255, 89);
     }
 
     :root {
@@ -15,20 +37,15 @@
       --grid-rows: 1;
     }
 
-    svg {
-      fill: rgb(38, 56, 255);
-    }
-
     #svg {
       position: absolute;
+      display: block;
       z-index: 100;
       pointer-events: none;
     }
 
     #container {
       cursor: pointer;
-      margin: 0 auto;
-      position: absolute;
       width: 640px;
       height: 640px;
       display: grid;
@@ -37,47 +54,45 @@
       grid-template-columns: repeat(var(--grid-cols), 1fr);
     }
 
-    .neco {
-      color: rgb(71, 43, 255);
-    }
-
     .grid-cell {
       display: flex;
       align-items: center;
       justify-content: center;
-      background-image: url("grid-cross.png");
+      background-image: url("grid-cross.svg");
       background-repeat: no-repeat;
       background-attachment: local;
       background-size: cover;
     }
 
     .ball {
-      height: 1.5em;
-      width: 1.5em;
-      border-radius: 2em;
+      height: 3rem;
+      width: 3rem;
+      border-radius: 1rem;
       transition: all 0.3s ease-in-out;
     }
 
     .grid-cell:hover .ball {
       transition: all 0.3s;
-      background-color: rgb(38, 56, 255);
+      background-color: rgb(60, 80, 255);
     }
 
     .active {
-      background-color: rgb(38, 56, 255);
+      background-color: rgb(60, 80, 255);
     }
-
-    /* .box {
-      position: relative;
-      margin: 0 auto;
-      padding: 2em;
-      width: 640px;
-    } */
   </style>
   <body>
     <div class="box">
+      <svg
+        id="svg"
+        width="640"
+        height="640"
+        xmlns="http://www.w3.org/2000/svg"
+      ></svg>
       <div id="container"></div>
-      <svg id="svg" width="640" height="640"></svg>
+
+      <div class="controls">
+        <a id="link" class="download" download>Download SVG</a>
+      </div>
     </div>
 
     <!-- <svg width="190" height="160" xmlns="http://www.w3.org/2000/svg">

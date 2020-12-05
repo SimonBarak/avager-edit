@@ -1,4 +1,4 @@
-const color = "rgb(38, 56, 255)";
+const color = "rgba(60, 80, 255, 0.4)";
 //const bgColor = "rgb(38, 56, 255)";
 
 const grid = 80;
@@ -6,7 +6,7 @@ const gridOffset = grid / 2;
 const shapeSize = grid - 6;
 const shapeRound = shapeSize / 2;
 
-const mistake = 1.1; // 1.08
+const mistake = 1.2; // 1.08
 const conectedObjectShape = 1.16; // 1.08
 
 let startCoordinates = null;
@@ -19,6 +19,32 @@ const containerSVG = document.getElementById("svg");
 function pythagorean(sideA, sideB) {
   return Math.sqrt(Math.pow(sideA, 2) + Math.pow(sideB, 2));
 }
+
+const prepareSVG = (elementID) => {
+  //get svg element.
+  var svg = document.getElementById(elementID);
+
+  //get svg source.
+  var serializer = new XMLSerializer();
+  var source = serializer.serializeToString(svg);
+
+  if (!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)) {
+    source = source.replace(
+      /^<svg/,
+      '<svg xmlns:xlink="http://www.w3.org/1999/xlink"'
+    );
+  }
+
+  //add xml declaration
+  source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+
+  //convert svg source to URI data scheme.
+  var url = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
+
+  //set url value to a element's href attribute.
+  document.getElementById("link").href = url;
+  //you can download svg file by right click menu.
+};
 
 function snap(op) {
   // subtract offset (to center lines)
@@ -39,12 +65,6 @@ StartDefs.innerHTML = `<marker id="startDefs" orient="auto" markerWidth="3" mark
 <!-- triangle pointing right (+x) -->
 <path d="M0,0 V1 A 0.75 0.75, 0, 0, 1 ${conectedObjectShape}  1 V0 A 0.75 0.75, 0, 0, 1 0 0 Z" fill="${color}"></path>
 </marker>`;
-
-// const EndDefs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-// EndDefs.innerHTML = `<marker id="endDefs" orient="auto" markerWidth="2" markerHeight="2" refX="2.4" refY="1">
-// <!-- triangle pointing right (+x) -->
-// <path d="M0,0.5 V1.5 L2,2 V0 Z" fill="black"></path>
-// </marker>`;
 
 containerSVG.append(StartDefs);
 //containerSVG.append(EndDefs);
@@ -99,6 +119,7 @@ const drowPath = (cx, cy) => {
 
   var newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
   newPath.setAttribute("d", d);
+  newPath.setAttribute("fill", color);
   containerSVG.append(newPath);
 };
 
@@ -118,10 +139,9 @@ function makeRows(rows, cols) {
       const snapedY = snap(event.clientY);
 
       drowPath(snapedX, snapedY);
+      drowLine([snapedX, snapedY]);
 
-      if (event.altKey) {
-        drowLine([snapedX, snapedY]);
-      }
+      prepareSVG("svg");
     });
 
     container.appendChild(cell).className = "grid-cell";
