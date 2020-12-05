@@ -1,18 +1,19 @@
-const color = "rgba(60, 80, 255, 0.4)";
+const color = "rgba(60, 80, 255, 1)";
 //const bgColor = "rgb(38, 56, 255)";
 
-const grid = 80;
+const grid = 160;
 const gridOffset = grid / 2;
-const shapeSize = grid - 6;
+const shapeSize = grid - 15;
 const shapeRound = shapeSize / 2;
 
-const mistake = 1.2; // 1.08
-const conectedObjectShape = 1.16; // 1.08
+//const mistake = 1; // 1.08
+const conectedObjectShape = 1.21; // 1.08
 
 let startCoordinates = null;
 
 const container = document.getElementById("container");
 const containerSVG = document.getElementById("svg");
+
 // containerSVG.setAttribute("fill", color);
 // container.setAttribute("style", `background-color:${bgColor}`);
 
@@ -63,7 +64,7 @@ const StartDefs = document.createElementNS(
 );
 StartDefs.innerHTML = `<marker id="startDefs" orient="auto" markerWidth="3" markerHeight="3" refX="-0.50" refY="0.5">
 <!-- triangle pointing right (+x) -->
-<path d="M0,0 V1 A 0.75 0.75, 0, 0, 1 ${conectedObjectShape}  1 V0 A 0.75 0.75, 0, 0, 1 0 0 Z" fill="${color}"></path>
+<path d="M0,0 V1 A 0.85 0.85, 0, 0, 1 ${conectedObjectShape}  1 V0 A 0.85 0.85, 0, 0, 1 0 0 Z" fill="${color}"></path>
 </marker>`;
 
 containerSVG.append(StartDefs);
@@ -147,5 +148,4 @@ function makeRows(rows, cols) {
     container.appendChild(cell).className = "grid-cell";
   }
 }
-
-makeRows(8, 8);
+makeRows(4, 4);
