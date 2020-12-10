@@ -1,4 +1,4 @@
-const color = "rgba(60, 80, 255, 1)";
+let color = "rgba(60, 80, 255, 1)";
 //const bgColor = "rgb(38, 56, 255)";
 
 const grid = 160;
