@@ -1,0 +1,29 @@
+body {
+  background-color: rgb(27, 27, 27);
+  margin: 0;
+}
+
+#container {
+  cursor: pointer;
+  display: grid;
+  grid-gap: 0;
+  grid-template-rows: repeat(var(--grid-rows), 1fr);
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+}
+
+.grid-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("grid-cross.svg");
+  background-repeat: no-repeat;
+  background-attachment: local;
+  background-size: cover;
+}
+
+#svg {
+  position: absolute;
+  display: block;
+  z-index: 100;
+  pointer-events: none;
+}
